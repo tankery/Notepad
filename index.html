@@ -29,7 +29,12 @@ tags: [Hossain, Mohd, Faysal, electrical, engineering, blog, university, pennsyl
                 </h3>
             </header>
             <section class="summer-post-excerpt">
-                <p>{{ post.content | strip_html | truncatewords:40 }}</p>
+                <p>
+                {{ post.content | split:'<!--break-->' | first }}
+                {% if post.content contains '<!--break-->' %}
+                <a href="{{ site.baseurl }}{{ post.url }}">...</a>
+                {% endif %}
+                </p>
             </section>
             
                 <div class="summer-index-post-tags">
@@ -83,7 +88,12 @@ tags: [Hossain, Mohd, Faysal, electrical, engineering, blog, university, pennsyl
                 </h3>
             </header>
             <section class="summer-post-excerpt">
-                <p>{{ post.content | strip_html | truncatewords:100 }}</p>
+                <p>
+                {{ post.content | split:'<!--break-->' | first }}
+                {% if post.content contains '<!--break-->' %}
+                <a href="{{ site.baseurl }}{{ post.url }}">...</a>
+                {% endif %}
+                </p>
             </section>
             
                 <div class="summer-index-post-tags">
