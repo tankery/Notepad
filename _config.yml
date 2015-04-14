@@ -1,5 +1,5 @@
 title:            Tankery
-description:      "Fly the code"
+description:      Fly the Code
 logo:             logo3.png
 disqus_shortname: tankery
 share:            true
@@ -10,9 +10,10 @@ url:        	  http://tankery.me/blog
 
 # Color settings (hex-codes without the leading hash-tag)
 color:
-  primary: 18bc9c #80B3FF
-  secondary: 2c3e50 #FD6E8A
-  secondary-dark: 233140 #A2122F
+  primary: \#18bc9c #80B3FF
+  secondary: \#2c3e50 #FD6E8A
+  highlight: \#01579B #FD6E8A
+  secondary-dark: \#233140 #A2122F
 
 # Owner/author information
 owner:
@@ -20,12 +21,12 @@ owner:
   avatar:         tankery.jpg
   email:          tankery.chen@gmail.com
   # Use the coder's toolbox at http://coderstoolbox.net/string/#!encoding=xml&action=encode&charset=us_ascii to encode your description into XML string
-  description:    Awesome Dude, Awesome Life
+  description:    Fly the Code, Fly my Life
   # Social networking links used in footer. Update and remove as you like.
   #twitter:        tankery_chen
-  #facebook:       hmfaysal
+  weibo:          1658528753
+  facebook:       tankery.chen
   github:         tankery
-  #instagram:      hmfaysal
   # For Google Authorship https://plus.google.com/authorship
   google_plus:    https://plus.google.com/u/0/+TankeryChen
 
@@ -47,10 +48,11 @@ links:
   - title: Categories
     url: /categories
   - title: About
-    url: /hossain-mohd-faysal
+    url: http://tankery.me/
+    external: true
 
 # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-timezone:    America/New_York
+timezone:    Asia/Shanghai
 future:      true
 highlighter: pygments
 markdown:    kramdown
@@ -73,89 +75,6 @@ kramdown:
     coderay_tab_width: 4
     coderay_bold_every: 10
     coderay_css: class
-
-prose:
-  rooturl: '_posts'
-  siteurl: 'http://hmfaysal.github.io/'
-  relativeLinks: 'http://hmfaysal.github.io/links.jsonp'
-  media: 'images'
-  metadata:
-    _posts:
-      - name: "published"
-        field:
-          label: "Published"
-          element: "checkbox"
-          value: "true"
-      - name: "layout"
-        field:
-          element: "hidden"
-          label: "Layout"
-          value: "post"
-      - name: "title"
-        field:
-          label: "Title"
-          element: "text"
-          value: "An Awesome Headline!"
-      - name: "description"
-        field:
-          element: "text"
-          label: "Description"
-          placeholder: "Enter Post Description"
-      - name: "headline"
-        field:
-          element: "text"
-          label: "beadline"
-          placeholder: "Enter Post Headline"
-      - name: "modified"
-        field:
-          element: "text"
-          label: "Has this page been modified?"
-          placeholder: "YYYY-MM-DD"
-      - name: "categories"
-        field:
-          element: "multiselect"
-          label: "Add categories"
-          placeholder: "Choose categories"
-          value: personal
-          options:
-            - name: "Personal"
-              value: personal
-            - name: "Engineering"
-              value: engineering
-            - name: "Physics"
-              value: physics
-            - name: "Psychology"
-              value: psychology
-            - name: "Interesting"
-              value: interesting
-            - name: "Web-Development"
-              value: webdevelopment
-          alterable: true
-      - name: "tags"
-        field:
-          element: "text"
-          label: "Tags"
-          placeholder: "Enter tags, separated by spaces"
-      - name: "imagefeature"
-        field:
-          element: "text"
-          label: "Featured Image"
-          placeholder: "somefile.jpg"
-      - name: "mathjax"
-        field:
-          element: "checkbox"
-          label: "MathJax"
-          value: false
-      - name: "featured"
-        field:
-          element: "checkbox"
-          label: "Featured?"
-          value: false
-      - name: "comments"
-        field:
-          element: "checkbox"
-          label: "Comments"
-          value: false
 
 
 include: [".htaccess"]
