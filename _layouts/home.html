@@ -23,7 +23,7 @@ https://www.facebook.com/hmfaysal
 <body class="home-template" itemscope itemtype="http://schema.org/WebPage">
 <header class="summer-site-head">
     <div class="summer-site-head-menu">
-        <a class="summer-blog-logo" href="{{ site.url }}"><img src="{{ site.url }}/images/{{ site.logo }}" alt="Blog Logo" /></a>
+        <a class="summer-blog-logo" href="{{ "/" }}"><img src="{{ site.baseurl }}/images/{{ site.logo }}" alt="Blog Logo" /></a>
         
         
         <div class="summer-blog-menu">      
@@ -38,10 +38,10 @@ https://www.facebook.com/hmfaysal
             <li>{% if link.external %}
             <a href="{{ link.url }}">{{ link.title }}</a>
             {% else %}
-            <a href="{{ site.url }}{{ link.url }}">{{ link.title }}</a>
+            <a href="{{ site.baseurl }}{{ link.url }}">{{ link.title }}</a>
             {% endif %} </li>
 {% endfor %}            
-           <li><a href="{{ site.url }}/feed.xml" title="Atom/RSS feed"><i class="icon-rss"></i> Feed</a></li>
+           <li><a href="{{ site.baseurl }}/feed.xml" title="Atom/RSS feed"><i class="icon-rss"></i> Feed</a></li>
     </ul>
 </div>
         <div class="clearfix"></div>
