@@ -111,14 +111,14 @@ h1, h2, h3, h4, h5, h6 {
     .summer-blog-menu ul li a:hover {
         border-bottom: 0.1875rem solid #e51843; } }
 
-.summer-site-head .summer-site-head-menu {
+.summer-site-head .summer-menu-header {
     background: white; }
-.summer-site-head .summer-site-head-menu .summer-blog-logo {
+.summer-site-head .summer-menu-header .summer-blog-logo {
     display: inline-block;
     max-height: 5rem; }
-.summer-site-head .summer-site-head-menu .summer-blog-logo img {
+.summer-site-head .summer-menu-header .summer-blog-logo img {
     max-height: 5rem; }
-.summer-site-head .summer-site-head-menu .title {
+.summer-site-head .summer-menu-header .title {
     display: inline-block;
     padding: 0;
     padding-left: 1.25rem;
@@ -131,9 +131,9 @@ h1, h2, h3, h4, h5, h6 {
     color: black;
     text-transform: uppercase;
     letter-spacing: -0.0625rem; }
-.summer-site-head .summer-site-head-menu .title a {
+.summer-site-head .summer-menu-header .title a {
     color: black; }
-.summer-site-head .summer-site-head-menu .title a:hover {
+.summer-site-head .summer-menu-header .title a:hover {
     color: black; }
 .summer-site-head .summer-site-head-content {
     width: 100%;

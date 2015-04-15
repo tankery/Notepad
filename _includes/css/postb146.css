@@ -52,7 +52,7 @@ html, body, .summer-post-container, .summer-post-header {
     margin: 0 auto;
     min-height: 35rem;
     width: 100%; }
-.post-template .summer-post-header .summer-post-menu-header {
+.post-template .summer-post-header .summer-menu-header {
     width: 100%;
     height: 5rem;
     background-color: black;
@@ -61,10 +61,10 @@ html, body, .summer-post-container, .summer-post-header {
     top: 0;
     left: 0;
     z-index: 9999; }
-.post-template .summer-post-header .summer-post-menu-header .summer-blog-logo {
+.post-template .summer-post-header .summer-menu-header .summer-blog-logo {
     display: inline-block;
     max-height: 5rem; }
-.post-template .summer-post-header .summer-post-menu-header .summer-blog-logo img {
+.post-template .summer-post-header .summer-menu-header .summer-blog-logo img {
     max-height: 5rem; }
 .post-template .bg-img {
     position: absolute;
@@ -93,10 +93,6 @@ html, body, .summer-post-container, .summer-post-header {
     left: 50%;
     -webkit-transform: translateX(-50%) translateY(-50%);
     transform: translateX(-50%) translateY(-50%); }
-.post-template .summer-post-title a {
-    color: black; }
-.post-template .summer-post-title a:hover {
-    color: #e51843; }
 .post-template .summer-post-title h1 {
     color: black;
     font-weight: 800;
@@ -113,10 +109,14 @@ html, body, .summer-post-container, .summer-post-header {
 @media only screen and (min-width: 90em) {
     .post-template .summer-post-title h1 {
         font-size: 5.3125rem; } }
+
 .post-template .summer-post-title.background--light h1 {
+    text-shadow: 0px 0px 3px rgba(255,255,255,0.6);
     color: black; }
 .post-template .summer-post-title.background--dark h1 {
+    text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
     color: white; }
+
 .post-template button.trigger {
     position: fixed;
     bottom: 2.5rem;
@@ -133,8 +133,10 @@ html, body, .summer-post-container, .summer-post-header {
     font-size: 2em;
     cursor: pointer; }
 .post-template button.trigger.background--light::before, .post-template button.trigger.background--light span::before {
+    text-shadow: 0px 0px 3px rgba(255,255,255,0.6);
     color: black; }
 .post-template button.trigger.background--dark::before, .post-template button.trigger.background--dark span::before {
+    text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
     color: white; }
 .post-template .summer-post-container:not(.notrans) button.trigger {
     -webkit-transition: opacity 0.3s 0.5s;
@@ -368,19 +370,19 @@ html, body, .summer-post-container, .summer-post-header {
 .summer-page-container {
     /* Page conent */ }
 
-.summer-page-container .summer-page-menu-header {
+.summer-page-container .summer-menu-header {
     width: 100%;
     height: 5rem;
     background-color: black;
     color: white;
     position: relative;
     z-index: 9999; }
-.summer-page-container .summer-page-menu-header .summer-blog-logo {
+.summer-page-container .summer-menu-header .summer-blog-logo {
     display: inline-block;
     max-height: 5rem; }
-.summer-page-container .summer-page-menu-header .summer-blog-logo img {
+.summer-page-container .summer-menu-header .summer-blog-logo img {
     max-height: 5rem; }
-.summer-page-container .summer-page-title {
+.summer-page-container .summer-title {
     margin: 0 auto;
     width: 100%; }
 .summer-page-container .summer-page-title a {
