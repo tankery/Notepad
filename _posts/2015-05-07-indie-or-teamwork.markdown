@@ -10,7 +10,7 @@ tags:
   - 职业规划
 comments: true
 mathjax: null
-featured: true
+featured: false
 published: true
 ---
 
