@@ -1,6 +1,6 @@
 ---
 layout: post
-title: RxJava 的那些坑
+title: RxJava 的一些坑
 description: "RxJava 是 ReactiveX，响应函数式编程库的一个平台扩展，本文结合自己的使用，对其进行介绍"
 headline: "RxJava 是 ReactiveX，响应函数式编程库的一个平台扩展，本文结合自己的使用，对其进行介绍"
 categories: development
@@ -17,11 +17,11 @@ published: true
 RxJava 是 ReactiveX，响应函数式编程库的一个平台分支，本文结合自己的使用，对其进行介绍。
 
 项目中使用的异步任务库 [Groundy](https://github.com/telly/groundy) 停止维护了。
-它推荐我们使用 [RxJava](https://github.com/ReactiveX/RxJava)，[ReactiveX](http://reactivex.io/) 的Java平台扩展。
-提供函数式编程，方便异步、事件驱动编程的库。
+它推荐我们使用 [RxJava][rxjava]，[ReactiveX][reactivex] 的Java平台扩展。
+RxJava提供函数式编程，方便异步、事件驱动，有很好的异步异常处理方式，并且，封装了大量的操作符，帮助你快速的应用某种编程模式。
 
-这个库其实不大，但由于其基于一套抽象的编程范式，使得其学习曲线非常陡峭。
-我花了一周的上下班和其他零碎时间，才自信到可以将此编程模式引入目前的项目中。
+这个库其实不大，但由于其基于一套非常不同的，抽象的编程范式，使得其学习曲线非常陡峭。
+我花了一周的上下班和其他零碎时间，才自信到可以将此编程模式引入目前的项目中。而在使用中，却仍然遇到大量的问题。
 
 但是，也正因为在学习过程中，不断的发现其过人之处，才能兴致勃勃的不断了解。
 并且，随着学习的不断深入，我越来越发现，ReactiveX 为我打开了一扇通向全新世界的门。
@@ -30,18 +30,18 @@ RxJava 是 ReactiveX，响应函数式编程库的一个平台分支，本文结
 
 ## RxJava 入门
 
-这篇文章，我不打算进行入门性的介绍。
+这篇文章，我不打算进行太多入门性的介绍。
 因为网络上的文章实在是很多：
 
 最直观、最权威的介绍来自官网，它用简单的语言，说清楚了RxJava到底是什么，有什么优势：
 
- - [ReactiveX](http://reactivex.io/)
+ - [ReactiveX][reactivex]
 
 
-想直接上手使用，请看这四篇介绍文章：
+想直接上手使用，推荐你看看这四篇介绍文章：
 
 1. [深入浅出RxJava（一：基础篇）](http://blog.csdn.net/lzyzsd/article/details/41833541)
-2. [深入浅出RxJava(二：操作符)] (http://blog.csdn.net/lzyzsd/article/details/44094895)
+2. [深入浅出RxJava(二：操作符)](http://blog.csdn.net/lzyzsd/article/details/44094895)
 3. [深入浅出RxJava三--响应式的好处](http://blog.csdn.net/lzyzsd/article/details/44891933)
 4. [深入浅出RxJava四-在Android中使用响应式编程](http://blog.csdn.net/lzyzsd/article/details/45033611)
 
@@ -66,9 +66,24 @@ C c = getCFromB(b);
 
 ![Callback Hell](http://seajones.co.uk/content/images/2014/12/callback-hell.png)
 
+具体到上面的例子，如果每个函数都是异步的，我们会遇到这样代码：
+
+``` Java
+getAsyncA(va -> {
+    getAsyncB(va, vb -> {
+        getAsyncC(vb, vc -> {
+            doSomethingWithC(vc);
+        });
+    });
+});
+```
+
+这段代码，已经是使用 Java 8 的 lambda函数 来简化过的了，而依旧如此复杂，难以阅读。
+一旦程序添加更多逻辑，将变得更加的难以维护。
+
 而 ReactiveX 扩展了观察者模式，构建了一套利用 Observable 将异步函数进行组合的系统。
 
-Observable 有些类似于 Android 的 Future，将异步返回值，包装到了 Observable 中。
+Observable 将异步返回值，包装到了 Observable 中。
 并在这之上，提供了大量的操作符，对 Observable 进行操作，从而解决了异步函数的组合问题。
 
 举个栗子，ReactiveX 可以这么组合函数：
@@ -79,9 +94,7 @@ Observable<B> b = a.flatMap(va -> getAsyncB(va));
 Observable<C> c = b.flatMap(vb -> getAsyncC(vb));
 ```
 
-栗子中使用了 Java 8 的 lambda 函数来简化程序。
-
-由于其返回值是连续的，我们甚至可以将其组合成链式结构：
+将原来的嵌套回调，扁平化成了类似同步函数调用的形式。而且，由于其返回值是连续的，我们甚至可以将其组合成下面这样的链式结构：
 
 ``` Java
 Observable<C> c = getAsyncA()
@@ -95,9 +108,143 @@ Observable<C> c = getAsyncA()
 c.subscribe(vc -> doWithC(vc));
 ```
 
-可以看到，ReactiveX 实际上是利用了一个 Observable，异步返回值，来对应原来函数的直接返回值。
-并利用一些操作符，对这个异步的返回值进行操作，以获得最终的结果。
-这样，将复杂的嵌套结构，扁平化成了一个链式结构。
-大大增加了程序的可读性。
+可以看到，ReactiveX 的 Observable，异步返回值，实际上是对应了原来同步函数的直接返回值。
+并利用一些操作符，对这个异步的返回值进行操作，对应于以前对同步返回值的操作。
+这样，将复杂的嵌套回调结构，扁平化成了一个链式结构，大大增加了程序的可读性。
+
+## 使用 RxJava 时容易犯的一些错误
+
+由于 RxJava 的复杂性和全新的编程方式。使用中非常容易忽视一些重要的点，导致问题的出现。
+这里我列举和记录一些自己遇到的错误，以便记录和交流。
+示例代码基于 RxJava 1.0.4，RxAndroid 0.24，使用 Java 8 的 lambda 简化代码。
+如果你也想在 Android 项目中支持 Java 8，可以使用 [Retrolambda][retrolambda] （仅支持 Android Studio 环境）。
+
+### 基本概念和用法
+
+理解 RxJava 最关键的部分，就是理解 RxJava 的流，包括流的源头 (Observable)、操作 (Operation)、和终点 (Subscription)。
+
+需要特别注意的是，流的创建，只有在被订阅时，才会开始。流的操作，只有在有数据传递过来时，才会进行，这一切都是异步的。
+如果不理解这一点，你会发现代码中处处都影藏着错误。
+
+#### 错误的理解了代码执行时机
+
+看看这段代码，会输出什么？
+
+``` Java
+Observable<String> source = Observable.create(subscriber -> {
+    System.out.println("In source");
+    if (!subscriber.isUnsubscribed()) {
+        subscriber.onNext("Source");
+        subscriber.onCompleted();
+    }
+});
+System.out.println("Created source");
+source.subscribe(str -> System.out.println("Get str " + str));
+System.out.println("After subscribed");
+```
+
+创建自定义 Observable 时，刚入门的人容易犯的错误，是以为 create 之后，OnSubscribe (代码中的 subscriber lambda) 就会被调用，但其实不然。
+要弄清楚，OnSubscribe 只有在 subscribe 时，才会被调用。
+而 subscribe 时传入的 Observer，会在未来的时候（有数据传递过来时）被调用。
+Observable 的创建、subscribe 和 observe 是在三个不同的时间执行。
+
+可能上面的例子还比较简单，一般不会出错，但如果将代码的执行时机，和 Java 8 的函数引用联系起来，就不那么好理解了。
+
+看看下面这块代码：
+
+``` Java
+// 执行任务的类
+class Foo {
+    public String bar(int a) {
+        System.out.println("In Foo.bar");
+        return "Foo got " + a;
+    }
+}
+// 存储类，实际项目中，这个类可能是当前类，而foo是一个成员变量
+class Wrapper {
+    public Foo foo;
+}
+Wrapper wrapper = new Wrapper();
+
+// 用于延迟触发数据流传输
+PublishSubject<Integer> sourceSubject = PublishSubject.create();
+
+System.out.println("Before chaining");
+sourceSubject.asObservable()
+        .filter(a -> wrapper.foo != null)
+        .map(a -> wrapper.foo.bar(a))   // * 这一行会被编辑器提示，推荐使用 method reference
+        .subscribe(System.out::println);
+System.out.println("Created chain");
+
+// 当数据流处理链条构建好了以后，我们初始化变量foo，然后触发数据流的传输。
+wrapper.foo = new Foo();
+sourceSubject.onNext(0);
+System.out.println("After next");
+```
+
+代码里面，为了确保`foo`不为空，专门使用了一个`filter`操作符来保证。
+最终我们得到如预期一致的结果，打印了下面的文字：
+
+```
+Before chaining
+Created chain
+In Foo.bar
+Foo got 0
+After next
+```
+
+但是，如果我们按照编辑器的建议，将`*`行修改成 method reference 以后，我们将会得到一个 NPE 的错误。
+代码和输出如下：
+
+``` Java
+...
+sourceSubject.asObservable()
+        .filter(a -> wrapper.foo != null)
+        .map(wrapper.foo::bar)      // * 这一行将会导致崩溃
+        .subscribe(System.out::println);
+...
+```
+
+```
+Before chaining
+
+java.lang.NullPointerException
+```
+
+可以看到，崩溃的时机是在构建链条时。
+所以，我们需要注意的是，函数引用的对象，是在生成引用时就会被调用的，而不是使用引用时。
+你可以再试试，假如foo在一开始就已经初始化完成，会有怎样的行为。
+
+
+#### 没有Unsubscribe
+
+Subscribe（订阅） 可以开启一串流的阀门，并接收流的输出。而如果你在 subscribe 以后，忘记 un-subscribe，你会收获到什么？
+这跟流的类型有关。
+
+假如未订阅的流，是一个 [cold observable][rxjava-observable]，且数据的发送很快就结束的话，并不会有什么大的问题。
+而如果订阅的是 [hot observable][rxjava-observable]（不会结束的流）， 则可能引发内存泄露、多次注册等问题。
+一个比较好的习惯是，每一个 subscription，都加入到 SubscriptionList 中，在程序的 onDestroy 或其他销毁操作时，一次性 unsubscribe。这是个简单粗暴的方法，更优雅的方法是，在你不需要流的时候，就取消订阅。你为你的流，构建合适的生命周期。
+
+
+
+
+
+### 操作符 (Operators)
+
+### 线程、插件和其他
+
+
+
+[rxjava]: https://github.com/ReactiveX/RxJava
+[rxjava-observable]: http://reactivex.io/documentation/observable.html
+[reactivex]: http://reactivex.io/
+[retrolambda]: https://github.com/evant/gradle-retrolambda
+
+
+
+
+
+
+
 
 
