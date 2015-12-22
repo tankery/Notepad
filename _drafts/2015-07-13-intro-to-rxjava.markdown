@@ -40,10 +40,10 @@ RxJava提供函数式编程，方便异步、事件驱动，有很好的异步�
 
 想直接上手使用，推荐你看看这四篇介绍文章：
 
-1. [深入浅出RxJava（一：基础篇）](http://blog.csdn.net/lzyzsd/article/details/41833541)
-2. [深入浅出RxJava(二：操作符)](http://blog.csdn.net/lzyzsd/article/details/44094895)
-3. [深入浅出RxJava三--响应式的好处](http://blog.csdn.net/lzyzsd/article/details/44891933)
-4. [深入浅出RxJava四-在Android中使用响应式编程](http://blog.csdn.net/lzyzsd/article/details/45033611)
+1. [深入浅出RxJava 一：基础篇](http://blog.csdn.net/lzyzsd/article/details/41833541)
+2. [深入浅出RxJava 二：操作符](http://blog.csdn.net/lzyzsd/article/details/44094895)
+3. [深入浅出RxJava 三：响应式的好处](http://blog.csdn.net/lzyzsd/article/details/44891933)
+4. [深入浅出RxJava 四：在Android中使用响应式编程](http://blog.csdn.net/lzyzsd/article/details/45033611)
 
 
 而如果你想知道，我们为什么需要一个RxJava (一步步抽象，最终发现我们需要的，就是 RxJava），请看这篇文章：
@@ -223,13 +223,67 @@ Subscribe（订阅） 可以开启一串流的阀门，并接收流的输出。�
 
 假如未订阅的流，是一个 [cold observable][rxjava-observable]，且数据的发送很快就结束的话，并不会有什么大的问题。
 而如果订阅的是 [hot observable][rxjava-observable]（不会结束的流）， 则可能引发内存泄露、多次注册等问题。
-一个比较好的习惯是，每一个 subscription，都加入到 SubscriptionList 中，在程序的 onDestroy 或其他销毁操作时，一次性 unsubscribe。这是个简单粗暴的方法，更优雅的方法是，在你不需要流的时候，就取消订阅。你为你的流，构建合适的生命周期。
+一个比较好的习惯是，每一个 subscription，都加入到 SubscriptionList 中，在程序的 onDestroy 或其他销毁操作时，一次性 unsubscribe。当然这是个简单粗暴的方法，更优雅的方法是，在你不需要流的时候，就取消订阅。你为你的流，构建合适的生命周期。
 
-
-
-
+与订阅相关的，还有一个 SubscriptionList，也有个非常容易出错的地方。
+在 unsubscribe 之后 add 进来的 Subscription ，都会执行 unsubscribe 。
+所以，unsubscribe 之后，如果还想重新使用这个list，需要new一个新的。
 
 ### 操作符 (Operators)
+
+RxJava 提供了大量的操作符，能够让你轻松的驾驭一些并发、异步编程的范式。
+举个例子，假如你需要同时发起5个线程，访问远程的数据，再计算平均值。
+如果没有 RxJava ，你可能需要自己创建线程池，自己记录每个线程的返回结果，等待所有5个线程返回。
+使用 RxJava，你可以这样做：
+
+``` Java
+// 获取远程结果的异步函数
+Func1<Integer, Observable<Integer>> remoteFunction = input -> {
+    System.out.println("Remote result " + (input + 1));
+    return Observable.just(input + 1);
+};
+
+// 计算平均值的函数
+FuncN<Integer> calcAverage = results -> {
+    int sum = 0;
+    for (Object r : results) {
+        sum += (Integer) r;
+    }
+    return sum / results.length;
+};
+
+// 集合5个异步函数
+List<Observable<Integer>> remoteFunctions = new ArrayList<>();
+for (int i = 0; i < 5; i++) {
+    remoteFunctions.add(remoteFunction.call(i));
+}
+
+// 并发访问，将结果通过平均值函数计算后返回
+Observable.zip(remoteFunctions, calcAverage)
+        .subscribe(avg -> System.out.println("Got average " + avg));
+```
+
+使用一个zip操作符，就完成了并发访问、收集返回结果等等一系列操作。
+但是，也由于 RxJava 的操作符实在太多，使用前，一定要弄清楚操作符的意义、使用前提，否则容易出现一些奇怪的bug。
+
+
+#### 小心那些 hot observable 和收集类型的操作符
+
+cold observable 指那些只会触发有限个异步结果就Complete的observable。
+而hot observable 是指那些永不complete的observable。
+
+一定要小心 hot observable 这个永不 complete 的属性！！ 因为有些操作符，是需要等到结束才会返回结果，如果不小心操作了 hot observable ，那么这个操作符也就永不返回。。。。
+比如`reduce`, `toList`, `scan` 等。
+很多时候，如果你发现你的操作链条没有返回。
+在每一步操作之后，都看看其输出（onNext）和是否结束（onComplete），确保在reduce这类需要有限个元素的操作符前，元素流已经结束。
+
+#### distinctUntilChanged
+
+这个操作符可以过滤相同的元素，在很多时候都非常有用。
+但是！经常会出现当前的元素被修改，从而与新元素相同，导致没有被后续接收的问题存在。
+举例：我先获取了元素a，然后直接修改了a的属性，然后更新到数据源中，此时新元素b虽然与原始的a不同，但由于a被直接修改，导致a已经变化成与b相同的元素，从而出了bug。
+说起来，这个问题不怪distinctUntilChanged，但经常由于这个操作符而暴露了问题。
+解决方法，就是尽量将数据属性设置为final，避免错误的直接修改发生。这其实也使得程序更加“函数化”，避免 side effect。
 
 ### 线程、插件和其他
 
