@@ -229,6 +229,8 @@ Subscribe（订阅） 可以开启一串流的阀门，并接收流的输出。�
 在 unsubscribe 之后 add 进来的 Subscription ，都会执行 unsubscribe 。
 所以，unsubscribe 之后，如果还想重新使用这个list，需要new一个新的。
 
+另一个相关的技巧是，可用为 OnSubscribe 传入的 subscriber 添加一个 Subscription，在 unsubscribe 时做一些诸如注销操作。这样，就可以将订阅与取消订阅的动作绑定在一起了。
+
 ### 操作符 (Operators)
 
 RxJava 提供了大量的操作符，能够让你轻松的驾驭一些并发、异步编程的范式。
@@ -287,6 +289,24 @@ cold observable 指那些只会触发有限个异步结果就Complete的observab
 
 ### 线程、插件和其他
 
+理论上来说，RxJava 的正确使用方式是纯函数式编程。也就是说，所有的数据，都只会通过函数的参数和返回值来传递。不会有其他 side effects。 所以我们实际上是不用关心线程问题的。因为根本不会有多线程共享的数据。
+
+然而，实际情况并不这样。我们只是利用了 RxJava 的便捷，而不会那么严格的遵守纯函数式编程。
+因此而引入的中间变量是极可能被多个线程所共享的。
+所以，实际使用中，还是需要去关心各个操作函数所在的线程。
+特别是要注意 RxJava 的一些时序相关的操作符，比如 timeout, debounce 等，都可能引入新的线程。
+我们需要使用 `subscribeOn`, `observeOn` 这样的操作符来为那些线程敏感的操作指定线程。
+
+另外，Subject 不是线程安全的，如果你希望使用 subject，请一定注意它的线程。
+确保 onNext 都在一个线程调用，否则，使用 toSerialized() 将 subject 转变成线程安全的。
+
+当然，如果你想更加的函数化（这意味着更清晰的逻辑和更少机会出错），最好的办法是[不要使用 subject](http://stackoverflow.com/q/9299813/1038900)。这就需要看你的应用场景了。
+
+## 最后
+
+最后我想说的是，RX不是银弹，不是magic，只是一种优秀的编程范式。
+你还是需要自己去理清楚程序逻辑、处理好一些资源申请、释放的工作。
+理解了RxJava，你的程序能更加简洁和健壮，而滥用它，则会出现很多难以调试的错误，慎用慎用。
 
 
 [rxjava]: https://github.com/ReactiveX/RxJava
