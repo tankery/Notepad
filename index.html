@@ -1,12 +1,12 @@
 ---
 layout: home
-title: BLOG
-description: "The personal blog of Hossain Mohd. Faysal, a doctoral candidate in Electrical Engineering at University of Pennsylvania."
+title: FLY THE CODE - Tankery's Blog
+description: "The personal blog of Tankery Chen. An App creator and Android Developer."
 headline: An Engineer's Diary
-tags: [Hossain, Mohd, Faysal, electrical, engineering, blog, university, pennsylvania, doha, Qatar]
+tags: [Tankery, Tankery Chen, Android, engineering, blog, individual]
 ---
 {% if site.paginate %}
-	{% for post in paginator.posts %}
+    {% for post in paginator.posts %}
     <article class="summer-index-post post row">
         <div class="small-12 medium-3 large-2 columns datetime">
             <span class="summer-post-meta">
@@ -36,36 +36,36 @@ tags: [Hossain, Mohd, Faysal, electrical, engineering, blog, university, pennsyl
                 {% endif %}
                 </p>
             </section>
-            
+
                 <div class="summer-index-post-tags">
                 {% for tag in post.categories %}<a href="{{ site.baseurl }}/categories/index.html#{{ post.categories | cgi_encode }}" title="Other posts from the {{ tag | capitalize }} category">{{ tag | capitalize }}</a>{% unless forloop.last %}&nbsp;{% endunless %}{% endfor %}
-                    
+
                 </div>
-            
+
         </div>
     </article>
-	{% endfor %}
+    {% endfor %}
     <nav class="pagination" role="navigation">
     {% if paginator.previous_page %}
-	    {% if paginator.previous_page == 1 %}
-	    <a class="newer-posts" href="{{ "/" }}"><i class="fa fa-chevron-left"></i> Newer</a>
-	    {% else %}
-	    <a class="newer-posts" href="{{ site.baseurl }}/page{{ paginator.previous_page }}"><i class="fa fa-chevron-left"></i> Newer</a>
-	    {% endif %}
-	{% else %}
+        {% if paginator.previous_page == 1 %}
+        <a class="newer-posts" href="{{ "/" }}"><i class="fa fa-chevron-left"></i> Newer</a>
+        {% else %}
+        <a class="newer-posts" href="{{ site.baseurl }}/page{{ paginator.previous_page }}"><i class="fa fa-chevron-left"></i> Newer</a>
+        {% endif %}
+    {% else %}
     <span class="newer-posts faded"><i class="fa fa-chevron-left"></i> Newer</span>
     {% endif %}
 
-    
+
     <span class="page-number">Page {{ paginator.page }} of {{ paginator.total_pages }}</span>
-    	{% if paginator.next_page %} 
+        {% if paginator.next_page %}
         <a class="older-posts" href="{{ site.baseurl }}/page{{ paginator.next_page }}/">Older <i class="fa fa-chevron-right"></i></a>
-    	{% else %}
-    	<span class="older-posts faded">Older <i class="fa fa-chevron-right"></i></span>
-    	{% endif %}
-	</nav>
+        {% else %}
+        <span class="older-posts faded">Older <i class="fa fa-chevron-right"></i></span>
+        {% endif %}
+    </nav>
 {% else %}
-	{% for post in site.posts %}
+    {% for post in site.posts %}
     <article class="summer-index-post post row">
         <div class="small-12 medium-3 large-2 columns datetime">
             <span class="summer-post-meta">
@@ -95,13 +95,13 @@ tags: [Hossain, Mohd, Faysal, electrical, engineering, blog, university, pennsyl
                 {% endif %}
                 </p>
             </section>
-            
+
                 <div class="summer-index-post-tags">
                 {% for tag in post.categories %}<a href="{{ site.baseurl }}/categories/index.html#{{ post.categories | cgi_encode }}" title="Other posts from the {{ tag | capitalize }} category">{{ tag | capitalize }}</a>{% unless forloop.last %}&nbsp;{% endunless %}{% endfor %}
-                    
+
                 </div>
-            
+
         </div>
     </article>
-	{% endfor %}  
+    {% endfor %}
 {% endif %}
