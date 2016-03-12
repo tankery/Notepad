@@ -6,48 +6,59 @@ headline: An Engineer's Diary
 tags: [Tankery, Tankery Chen, Android, engineering, blog, individual]
 ---
 {% if site.paginate %}
-    {% for post in paginator.posts %}
-    <article class="summer-index-post post row">
-        <div class="small-12 medium-3 large-2 columns datetime">
-            <span class="summer-post-meta">
-                <time datetime="{{ post.date | date_to_xmlschema }}">
-                    <span class="day">
-                        {{ post.date | date: "%d" }}
-                    </span>
-                    <span class="month-year">
-                        {{ post.date | date: "%B %Y" }}
-                    </span>
-                </time>
-            </span>
-        </div>
-        <div class="small-12 medium-9 large-10 columns">
-            <header class="summer-post-header">
-                <h3 class="summer-post-title">
-                    <a href="{{ site.baseurl }}{{ post.url }}">
-                        {{ post.title }}
-                    </a>
-                </h3>
-            </header>
-            <section class="summer-post-excerpt">
-                <p>
-                {{ post.content | split:'<!--break-->' | first }}
-                {% if post.content contains '<!--break-->' %}
-                <a href="{{ site.baseurl }}{{ post.url }}">...</a>
+    {% assign container = paginator %}
+{% else %}
+    {% assign container = site %}
+{% endif %}
+
+{% for post in container.posts %}
+<article class="summer-index-post post row">
+    <div class="small-12 medium-3 large-2 columns datetime">
+        <span class="summer-post-meta">
+            <time datetime="{{ post.date | date_to_xmlschema }}">
+                <span class="day">
+                    {{ post.date | date: "%d" }}
+                </span>
+                <span class="month-year">
+                    {{ post.date | date: "%B %Y" }}
+                </span>
+            </time>
+        </span>
+    </div>
+    <div class="small-12 medium-9 large-10 columns">
+        <header class="summer-post-header">
+            <h3 class="summer-post-title">
+                <a href="{{ site.baseurl }}{{ post.url }}">
+                    {{ post.title }}
+                </a>
+            </h3>
+        </header>
+        <section class="summer-post-excerpt">
+            <p>
+                {% for more in site.post_conf.more_tag %}
+                {% if post.content contains more %}
+                {% assign more_tag = more %}
                 {% endif %}
-                </p>
-            </section>
-
-                <div class="summer-index-post-tags">
-                {% for tag in post.categories %}
-                <a href="{{ site.baseurl }}/categories/index.html#{{ post.categories | cgi_encode }}" title="Other posts from the {{ tag | capitalize }} category">{{ tag | capitalize }}</a>
-                {% unless forloop.last %}&nbsp;{% endunless %}
                 {% endfor %}
+            {{ post.content | split:more_tag | first }}
+            {% if more_tag %}
+            <a class="summer-post-excerpt-more" href="{{ site.baseurl }}{{ post.url }}">{{ site.post_conf.more_text }}</a>
+            {% endif %}
+            </p>
+        </section>
 
-                </div>
-
+        <div class="summer-index-post-tags">
+        {% for tag in post.categories %}
+        <a href="{{ site.baseurl }}/categories/index.html#{{ post.categories | cgi_encode }}" title="Other posts from the {{ tag | capitalize }} category">{{ tag | capitalize }}</a>
+        {% unless forloop.last %}&nbsp;{% endunless %}
+        {% endfor %}
         </div>
-    </article>
-    {% endfor %}
+
+    </div>
+</article>
+{% endfor %}
+
+{% if site.paginate %}
     <nav class="pagination" role="navigation">
     {% if paginator.previous_page %}
         {% if paginator.previous_page == 1 %}
@@ -67,44 +78,4 @@ tags: [Tankery, Tankery Chen, Android, engineering, blog, individual]
         <span class="older-posts faded">Older <i class="fa fa-chevron-right"></i></span>
         {% endif %}
     </nav>
-{% else %}
-    {% for post in site.posts %}
-    <article class="summer-index-post post row">
-        <div class="small-12 medium-3 large-2 columns datetime">
-            <span class="summer-post-meta">
-                <time datetime="{{ post.date | date_to_xmlschema }}">
-                    <span class="day">
-                        {{ post.date | date: "%d" }}
-                    </span>
-                    <span class="month-year">
-                        {{ post.date | date: "%B %Y" }}
-                    </span>
-                </time>
-            </span>
-        </div>
-        <div class="small-12 medium-9 large-10 columns">
-            <header class="summer-post-header">
-                <h3 class="summer-post-title">
-                    <a href="{{ site.baseurl }}{{ post.url }}">
-                        {{ post.title }}
-                    </a>
-                </h3>
-            </header>
-            <section class="summer-post-excerpt">
-                <p>
-                {{ post.content | split:'<!--break-->' | first }}
-                {% if post.content contains '<!--break-->' %}
-                <a href="{{ site.baseurl }}{{ post.url }}">...</a>
-                {% endif %}
-                </p>
-            </section>
-
-                <div class="summer-index-post-tags">
-                {% for tag in post.categories %}<a href="{{ site.baseurl }}/categories/index.html#{{ post.categories | cgi_encode }}" title="Other posts from the {{ tag | capitalize }} category">{{ tag | capitalize }}</a>{% unless forloop.last %}&nbsp;{% endunless %}{% endfor %}
-
-                </div>
-
-        </div>
-    </article>
-    {% endfor %}
 {% endif %}

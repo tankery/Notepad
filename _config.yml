@@ -84,6 +84,15 @@ permalink:   /:categories/:title
 #    coderay_bold_every: 10
 #    coderay_css: class
 
+# Some settings for post
+post_conf:
+  more_tag:
+    - <!--break-->
+    - <!-- break -->
+    - <!--more-->
+    - <!-- more -->
+  more_text: Read More...
+
 gems: [jekyll-paginate]
 
 include: [".htaccess"]
