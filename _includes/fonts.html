@@ -1,0 +1,6 @@
+
+{% if site.font.links %}
+    {% for font-link in site.font.links %}
+    <link href='{{ font-link }}' rel='stylesheet'>
+    {% endfor %}
+{% endif %}

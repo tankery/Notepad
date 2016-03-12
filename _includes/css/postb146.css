@@ -17,7 +17,7 @@ html, body, .summer-post-container, .summer-post-header {
     height: 5rem;
     line-height: 5rem;
     vertical-align: middle;
-    font-family: "Montserrat", sans-serif;
+    font-family: {% if site.font.title %}{{ site.font.title }}{% else %}sans-serif{% endif %};
     font-size: 1.625rem;
     font-weight: 700;
     color: white;
@@ -344,7 +344,7 @@ html, body, .summer-post-container, .summer-post-header {
 .summer-author-info .summer-post-author h1 {
     margin: 0;
     padding: 0;
-    font-family: "Montserrat", sans-serif;
+    font-family: {% if site.font.title %}{{ site.font.title }}{% else %}sans-serif{% endif %};
     font-weight: 700;
     text-transform: uppercase; }
 .summer-author-info .summer-post-author > p {

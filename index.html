@@ -38,7 +38,10 @@ tags: [Tankery, Tankery Chen, Android, engineering, blog, individual]
             </section>
 
                 <div class="summer-index-post-tags">
-                {% for tag in post.categories %}<a href="{{ site.baseurl }}/categories/index.html#{{ post.categories | cgi_encode }}" title="Other posts from the {{ tag | capitalize }} category">{{ tag | capitalize }}</a>{% unless forloop.last %}&nbsp;{% endunless %}{% endfor %}
+                {% for tag in post.categories %}
+                <a href="{{ site.baseurl }}/categories/index.html#{{ post.categories | cgi_encode }}" title="Other posts from the {{ tag | capitalize }} category">{{ tag | capitalize }}</a>
+                {% unless forloop.last %}&nbsp;{% endunless %}
+                {% endfor %}
 
                 </div>
 
