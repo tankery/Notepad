@@ -4,7 +4,7 @@ logo:             logo3.png
 disqus_shortname: tankery
 share:            true
 # Change url to your domain. Leave localhost server or blank when working locally.
-# or use the hint from http://jekyllrb.com/docs/github-pages/ to keep this the same 
+# or use the hint from http://jekyllrb.com/docs/github-pages/ to keep this the same
 # whether working locally or remotely. Start Jekyll with: jekyll serve --baseurl ''
 baseurl:       	  http://blog.tankery.me
 
@@ -39,10 +39,10 @@ owner:
   google_plus:    https://plus.google.com/u/0/+TankeryChen
 
 # Analytics and webmaster tools stuff goes here
-google_analytics:   
-google_verify:      
+google_analytics:
+google_verify:
 # https://ssl.bing.com/webmaster/configure/verify/ownership Option 2 content= goes here
-bing_verify:         
+bing_verify:
 
 # Links to include in footer navigation
 # For external links add external: true
@@ -62,27 +62,19 @@ links:
 # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 timezone:    Asia/Shanghai
 future:      true
-highlighter: rouge
-markdown:    redcarpet
 paginate:    5
 paginate_path: "page:num"
 
 # https://github.com/mojombo/jekyll/wiki/Permalinks
 permalink:   /:categories/:title
 
-#kramdown:
-#  auto_ids: true
-#  footnote_nr: 1
-#  entity_output: as_char
-#  toc_levels: 1..6
-#  use_coderay: true
-#
-#  coderay:
-#    coderay_line_numbers: 
-#    coderay_line_numbers_start: 1
-#    coderay_tab_width: 4
-#    coderay_bold_every: 10
-#    coderay_css: class
+markdown:    redcarpet
+highlighter: pygments
+
+# markdown:    kramdown
+# kramdown:
+#   input: GFM
+#   syntax_highlighter: rouge
 
 # Some settings for post
 post_conf:

@@ -195,8 +195,6 @@ html, body, .summer-post-container, .summer-post-header {
 @media only screen and (min-width: 70em) {
     .post-template .summer-post-content > div:not(.summer-post-title) {
         margin: -10% auto 0; } }
-.post-template .summer-post-content > div:not(.summer-post-title) a, .post-template .summer-post-content > div:not(.summer-post-title) code {
-    color: #e51843; }
 .post-template .summer-post-content > div:not(.summer-post-title) ul, .post-template .summer-post-content > div:not(.summer-post-title) ol {
     padding-left: 1.25rem;
     font-size: 1.125rem; }
@@ -210,12 +208,6 @@ html, body, .summer-post-container, .summer-post-header {
     margin: 0 auto 2em auto;
     max-width: 56.25rem;
     font-size: 1.125rem; }
-.post-template .summer-post-content > div:not(.summer-post-title) p:first-child {
-    font-size: 1.375rem;
-    font-weight: 300; }
-@media only screen and (min-width: 40.063em) {
-    .post-template .summer-post-content > div:not(.summer-post-title) p:first-child {
-        font-size: 1.625rem; } }
 .post-template .summer-post-content > div:not(.summer-post-title) p.with-image {
     text-align: center;
     padding-top: 3.125rem;
@@ -421,8 +413,6 @@ html, body, .summer-post-container, .summer-post-header {
     margin: 0 auto;
     padding-left: 1.875rem;
     padding-right: 1.875rem; }
-.summer-page-container .summer-page-content > div:not(.summer-page-title) a, .summer-page-container .summer-page-content > div:not(.summer-page-title) code {
-    color: #e51843; }
 .summer-page-container .summer-page-content > div:not(.summer-page-title) ul, .summer-page-container .summer-page-content > div:not(.summer-page-title) ol {
     padding-left: 1.25rem;
     font-size: 1.125rem; }
@@ -436,12 +426,6 @@ html, body, .summer-post-container, .summer-post-header {
     margin: 0 auto 2em auto;
     max-width: 56.25rem;
     font-size: 1.125rem; }
-.summer-page-container .summer-page-content > div:not(.summer-page-title) p:first-child {
-    font-size: 1.375rem;
-    font-weight: 300; }
-@media only screen and (min-width: 40.063em) {
-    .summer-page-container .summer-page-content > div:not(.summer-page-title) p:first-child {
-        font-size: 1.625rem; } }
 .summer-page-container .summer-page-content > div:not(.summer-page-title) p.with-image {
     text-align: center;
     padding-top: 3.125rem;
@@ -479,12 +463,9 @@ html, body, .summer-post-container, .summer-post-header {
     color: #fff; }
 
 pre {
-    word-wrap: break-word;
+    padding: 1.25rem;
+    background: rgba(240, 240, 240, 0.8);
     margin-bottom: 1.5625rem; }
-
-code {
-    font-size: 0.9375rem;
-    line-height: 1.2; }
 
 iframe {
     border: 0; }
