@@ -64,7 +64,7 @@ C c = getCFromB(b);
 
 而异步函数呢，如果使用回调，将会陷入一个叫做回调地狱的窘境中，有多囧，见图：
 
-![Callback Hell](http://seajones.co.uk/content/images/2014/12/callback-hell.png)
+![Callback Hell]({{ site.baseurl }}/images/post/intro-to-rxjava/callback-hell.jpg "Callback Hell")
 
 具体到上面的例子，如果每个函数都是异步的，我们会遇到这样代码：
 
@@ -313,12 +313,3 @@ cold observable 指那些只会触发有限个异步结果就Complete的observab
 [rxjava-observable]: http://reactivex.io/documentation/observable.html
 [reactivex]: http://reactivex.io/
 [retrolambda]: https://github.com/evant/gradle-retrolambda
-
-
-
-
-
-
-
-
-
