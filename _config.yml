@@ -68,13 +68,13 @@ paginate_path: "page:num"
 # https://github.com/mojombo/jekyll/wiki/Permalinks
 permalink:   /:categories/:title
 
-markdown:    redcarpet
-highlighter: pygments
+# markdown:    redcarpet
+# highlighter: pygments
 
-# markdown:    kramdown
-# kramdown:
-#   input: GFM
-#   syntax_highlighter: rouge
+markdown:    kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
 
 # Some settings for post
 post_conf:

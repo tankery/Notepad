@@ -36,14 +36,17 @@ tags: [Tankery, Tankery Chen, Android, engineering, blog, individual]
         <section class="summer-post-excerpt">
             <p>
                 {% for more in site.post_conf.more_tag %}
-                {% if post.content contains more %}
-                {% assign more_tag = more %}
-                {% endif %}
+                    {% if post.content contains more %}
+                        {% assign more_tag = more %}
+                        {% break %}
+                    {% endif %}
                 {% endfor %}
-            {{ post.content | split:more_tag | first }}
-            {% if more_tag %}
-            <a class="summer-post-excerpt-more" href="{{ site.baseurl }}{{ post.url }}">{{ site.post_conf.more_text }}</a>
-            {% endif %}
+
+                {{ post.content | split:more_tag | first }}
+
+                {% if more_tag %}
+                    <a class="summer-post-excerpt-more" href="{{ site.baseurl }}{{ post.url }}">{{ site.post_conf.more_text }}</a>
+                {% endif %}
             </p>
         </section>
 
