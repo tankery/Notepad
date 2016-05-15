@@ -20,6 +20,8 @@ published: true
 比赛是Ticwear举办的，故手表也采用的Ticwear系统。
 Ticwear系统兼容Android 5.0的API，所以开发者可以基于Android 5.0的SDK开发手表端的应用。
 
+## Android Studio 上手
+
 说起手表的开发、不得不提 [Android Studio](http://developer.android.com/tools/studio/index.html)。
 其实我是在比赛前一天、拿到手表真机之后，才决定切换到 Android Studio 做开发的。
 之前大约有两年半的时间，都在使用 Eclipse 搭配 ADT 插件开发。
@@ -49,5 +51,8 @@ Gradle 会在构建时，自动同步第三方库的代码**及其依赖的其�
 
 由于手表也是一个 Android 系统，步频识别模块的移植并没有什么难度，这里就不多说了。
 重点介绍数据通讯和语义识别的实现。
+
+## 数据通讯
+
 
 

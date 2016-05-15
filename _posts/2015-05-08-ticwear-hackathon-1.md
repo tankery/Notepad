@@ -1,8 +1,8 @@
 ---
 layout: post
-title: 记《步伐》手表版的诞生（上）
-description: "参加TicWear的Creatic Hackathon比赛，做了步伐的Android Wear版，第一部分，产品设计"
-headline: "参加TicWear的Creatic Hackathon比赛，做了步伐的Android Wear版，第一部分，产品设计"
+title: 记《步伐》手表版的诞生
+description: "参加TicWear的Creatic Hackathon比赛，做了步伐的Android Wear版，说说它的产品设计"
+headline: "参加TicWear的Creatic Hackathon比赛，做了步伐的Android Wear版，说说它的产品设计"
 categories: design
 tags:
   - 步伐
@@ -16,9 +16,9 @@ featured: true
 published: true
 ---
 
-这一篇文章主要介绍《步伐》手表版的产品设计，如果是对手表应用的开发感兴趣，请期待下篇。
+这篇文章主要介绍《步伐》手表版的产品设计。
 
-4月18~19日，我参加了TicWear的Creatic Hackathon比赛，做了个步伐的Android Wear版，[拿了个大奖](http://ask.ticwear.com/?/article/7)。
+4月18~19日，我参加了TicWear的Creatic Hackathon比赛，做了个步伐的Android Wear版，[拿了个“大奖”](http://ask.ticwear.com/?/article/7)。
 Hackathon 真的是一项非常不错的活动，在极短时间内，完成一项颇具挑战的事情。
 如果不是这个马拉松，估计做这个手表版至少得一个星期。
 就像评委柯老师说的那样，在有限的条件下，能心无杂念的去完成一件事情，可能激发出无限可能。
