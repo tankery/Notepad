@@ -26,24 +26,19 @@ published: true
 通过一个影片租赁系统来介绍重构的缘由和一些基本概念。
 
 1. 通过案例，而不是理论来介绍新概念。
-
 2. 在需要添加新特性，却需要大量修改代码时，就需要进行重构
-
 3. 重构的第一步是增加良好的测试。
-
 4. 一些重构的方式：
-
-  1. Extract Method, Extract Variable, Move Method
-  4. Replace Temp with Query （不要担心性能损耗，因为这很容易优化）
-  5. Form Template Method (重构以后的结果有些工厂方法的感觉，书里说，这是 Template Method 模式）
-  6. Self Encapsulate Field
-  7. Replace Type Code with State/Strategy
-
-    > 将类型码转换成类型类，通过继承来表示多个类型的逻辑
-
-  7. Replace Conditional with Polymorphism
-
-    > 当需要使用条件判断时（switch），将判断条件抽取成子类，通过多态来确定执行逻辑。
+   - Extract Method, Extract Variable, Move Method
+   - Replace Temp with Query  
+     不要担心性能损耗，因为这很容易优化
+   - Form Template Method  
+     重构以后的结果有些工厂方法的感觉，书里说，这是 Template Method 模式
+   - Self Encapsulate Field
+   - Replace Type Code with State/Strategy  
+     将类型码转换成类型类，通过继承来表示多个类型的逻辑
+   - Replace Conditional with Polymorphism  
+     当需要使用条件判断时（switch），将判断条件抽取成子类，通过多态来确定执行逻辑。
 
 案例最后的一次重构较为复杂。
 
