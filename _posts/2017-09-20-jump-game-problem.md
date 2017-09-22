@@ -4,7 +4,6 @@ title: Solve Jump Game Problem using State Machine
 description: "An O(n) and constant space solution for Jump Game Problem with State Machine"
 categories:
   - development
-  - presentation
   - en
 tags:
   - Jump Game Problem
