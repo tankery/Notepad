@@ -7,6 +7,11 @@ categories:
 tags:
   - 软件设计
   - 职责分离
+image:
+  feature: separation-of-duty/15062517839007.jpg
+  alt: "iceberg-water-blue-ocean-ice"
+  credit: pixabay.com
+  creditlink: "https://pixabay.com/en/iceberg-water-blue-ocean-ice-1421411/"
 comments: true
 mathjax: null
 featured: true
