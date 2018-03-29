@@ -18,8 +18,8 @@ font:
   title: Montserrat, Hiragino Sans GB, Microsoft Yahei, WenQuanYi Micro Hei, sans-serif
   content: Open Sans, sans-serif
   links:
-    - http://fonts.googleapis.com/css?family=Montserrat:400,700&amp;subset=latin,latin-ext
-    - http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800,600&amp;subset=latin,latin-ext
+    - //fonts.googleapis.com/css?family=Montserrat:400,700&amp;subset=latin,latin-ext
+    - //fonts.googleapis.com/css?family=Open+Sans:400,300,700,800,600&amp;subset=latin,latin-ext
 
 # Owner/author information
 owner:
